@@ -1,0 +1,54 @@
+<div class="card mb-4">
+  <div class="card-body">
+    <h5 class="card-title">{{ 'PRODUCTS.FILTERS' | translate }}</h5>
+
+    <!-- Category Filter -->
+    <div class="mb-4">
+      <h6 class="mb-3">{{ 'PRODUCTS.CATEGORIES' | translate }}</h6>
+      <select class="form-select" [(ngModel)]="selectedCategory" (change)="applyFilters()">
+        <option value="">{{ 'PRODUCTS.ALL_CATEGORIES' | translate }}</option>
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Price Range Filter -->
+    <div class="mb-4">
+      <h6 class="mb-3">{{ 'PRODUCTS.PRICE_RANGE' | translate }}</h6>
+      <div class="row g-2">
+        <div class="col">
+          <input type="number" class="form-control" 
+                 [(ngModel)]="priceRange.min" 
+                 (change)="applyFilters()"
+                 placeholder="Min">
+        </div>
+        <div class="col">
+          <input type="number" class="form-control" 
+                 [(ngModel)]="priceRange.max" 
+                 (change)="applyFilters()"
+                 placeholder="Max">
+        </div>
+      </div>
+    </div>
+
+    <!-- Rating Filter -->
+    <div class="mb-4">
+      <h6 class="mb-3">{{ 'PRODUCTS.MIN_RATING' | translate }}</h6>
+      <div class="btn-group w-100" role="group">
+        <button *ngFor="let star of [1,2,3,4,5]" 
+                class="btn btn-outline-primary"
+                [class.active]="minRating === star"
+                (click)="minRating = star; applyFilters()">
+          {{ star }} ★
+        </button>
+      </div>
+    </div>
+
+    <!-- Reset Button -->
+    <button class="btn btn-outline-secondary w-100" 
+            (click)="resetFilters()">
+      {{ 'PRODUCTS.RESET_FILTERS' | translate }}
+    </button>
+  </div>
+</div>

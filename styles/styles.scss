@@ -1,0 +1,12 @@
+// Import Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+// Custom variables
+@import "assets/scss/variables";
+@import "assets/scss/mixins";
+@import "assets/scss/utilities";
+
+// RTL support
+[dir="rtl"] {
+  @import "assets/scss/rtl-overrides";
+}

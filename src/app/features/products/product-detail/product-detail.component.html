@@ -1,0 +1,81 @@
+<div class="container py-5">
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border text-primary"></div>
+    <p>Loading product details...</p>
+  </div>
+
+  <div *ngIf="product" class="row">
+    <!-- Product Images -->
+    <div class="col-md-6">
+      <div class="mb-3">
+        <img [src]="product.images[currentImageIndex]" 
+             [alt]="product.title"
+             class="img-fluid rounded">
+      </div>
+      <div class="row g-2">
+        <div *ngFor="let image of product.images; let i = index" 
+             class="col-3">
+          <img [src]="image" 
+               [alt]="product.title + ' thumbnail ' + i"
+               class="img-thumbnail cursor-pointer"
+               [class.border-primary]="currentImageIndex === i"
+               (click)="changeImage(i)">
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Info -->
+    <div class="col-md-6">
+      <h2>{{ product.title }}</h2>
+      <div class="d-flex align-items-center mb-3">
+        <span class="badge bg-success me-2">{{ product.rating }} ★</span>
+        <span class="text-muted">{{ product.brand }}</span>
+      </div>
+
+      <div class="mb-4">
+        <h4 class="text-primary">
+          {{ product.price | priceFormat }}
+          <small *ngIf="product.discountPercentage > 0" 
+                 class="text-danger text-decoration-line-through ms-2">
+            {{ product.price * (1 + product.discountPercentage/100) | priceFormat }}
+          </small>
+        </h4>
+        <span *ngIf="product.discountPercentage > 0" 
+              class="badge bg-danger">
+          Save {{ product.discountPercentage }}%
+        </span>
+      </div>
+
+      <p class="mb-4">{{ product.description }}</p>
+
+      <div class="mb-4">
+        <span class="d-block mb-2">
+          <strong>Availability:</strong> 
+          <span [class.text-success]="product.stock > 0" 
+                [class.text-danger]="product.stock <= 0">
+            {{ product.stock > 0 ? 'In Stock (' + product.stock + ')' : 'Out of Stock' }}
+          </span>
+        </span>
+        <span class="d-block mb-2">
+          <strong>Category:</strong> {{ product.category }}
+        </span>
+      </div>
+
+      <button class="btn btn-primary btn-lg me-2"
+              (click)="addToCart()"
+              [disabled]="product.stock <= 0">
+        Add to Cart
+      </button>
+    </div>
+  </div>
+
+  <!-- Related Products -->
+  <div *ngIf="relatedProducts.length > 0" class="mt-5">
+    <h3 class="mb-4">Related Products</h3>
+    <div class="row">
+      <div *ngFor="let product of relatedProducts" class="col-lg-3 col-md-4 col-6 mb-4">
+        <app-product-card [product]="product"></app-product-card>
+      </div>
+    </div>
+  </div>
+</div>

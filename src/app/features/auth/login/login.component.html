@@ -1,0 +1,52 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <h2 class="card-title text-center mb-4">{{ 'AUTH.LOGIN_TITLE' | translate }}</h2>
+          
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="email" class="form-label">{{ 'AUTH.EMAIL' | translate }}</label>
+              <input type="email" class="form-control" id="email" formControlName="email"
+                     [class.is-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+              <div class="invalid-feedback" *ngIf="loginForm.get('email')?.hasError('required')">
+                {{ 'VALIDATION.REQUIRED' | translate }}
+              </div>
+              <div class="invalid-feedback" *ngIf="loginForm.get('email')?.hasError('email')">
+                {{ 'VALIDATION.INVALID_EMAIL' | translate }}
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">{{ 'AUTH.PASSWORD' | translate }}</label>
+              <input type="password" class="form-control" id="password" formControlName="password"
+                     [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+              <div class="invalid-feedback" *ngIf="loginForm.get('password')?.hasError('required')">
+                {{ 'VALIDATION.REQUIRED' | translate }}
+              </div>
+            </div>
+
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="rememberMe" formControlName="rememberMe">
+              <label class="form-check-label" for="rememberMe">{{ 'AUTH.REMEMBER_ME' | translate }}</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid || isLoading">
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-1"></span>
+              {{ 'AUTH.LOGIN' | translate }}
+            </button>
+
+            <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+              {{ errorMessage }}
+            </div>
+          </form>
+
+          <div class="text-center mt-3">
+            <a routerLink="/auth/register">{{ 'AUTH.NO_ACCOUNT' | translate }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
