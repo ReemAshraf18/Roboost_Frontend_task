@@ -1,1 +1,88 @@
-<p>footer works!</p>
+<footer class="footer pt-5">
+  <div class="container" dir="rtl">
+    <div class="row row-cols-1 row-cols-md-5 g-4 text-secondary">
+
+      <!-- About -->
+      <div class="col">
+        <h6 class="footer-title">{{ 'FOOTER.ABOUT.TITLE' | translate }}</h6>
+        <p>{{ 'FOOTER.ABOUT.LINE1' | translate }}</p>
+        <p>{{ 'FOOTER.ABOUT.LINE2' | translate }}</p>
+      </div>
+
+      <!-- My Account -->
+      <div class="col">
+        <h6 class="footer-title">{{ 'FOOTER.MY_ACCOUNT.TITLE' | translate }}</h6>
+        <ul class="list-unstyled">
+          <li><a href="#" class="footer-link pb-2">« {{ 'FOOTER.MY_ACCOUNT.MY_ACCOUNT' | translate }}</a></li>
+          <li><a href="#" class="footer-link pb-2">« {{ 'FOOTER.MY_ACCOUNT.ORDERS' | translate }}</a></li>
+          <li><a href="#" class="footer-link pb-2">« {{ 'FOOTER.MY_ACCOUNT.CART' | translate }}</a></li>
+          <li><a href="#" class="footer-link pb-2">« {{ 'FOOTER.MY_ACCOUNT.FAVORITES' | translate }}</a></li>
+        </ul>
+      </div>
+
+      <!-- Important Links -->
+      <div class="col">
+        <h6 class="footer-title">{{ 'FOOTER.LINKS.TITLE' | translate }}</h6>
+        <ul class="list-unstyled">
+          <li><a href="#" class="footer-link pb-2">« {{ 'FOOTER.LINKS.ABOUT_US' | translate }}</a></li>
+          <li><a href="#" class="footer-link pb-2">« {{ 'FOOTER.LINKS.PRIVACY' | translate }}</a></li>
+          <li><a href="#" class="footer-link pb-2">« {{ 'FOOTER.LINKS.TERMS' | translate }}</a></li>
+          <li><a href="#" class="footer-link pb-2">« {{ 'FOOTER.LINKS.SUPPORT' | translate }}</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Us -->
+      <div class="col">
+        <h6 class="footer-title">{{ 'FOOTER.CONTACT.TITLE' | translate }}</h6>
+        <ul class="list-unstyled">
+          <li style="color: rgb(172, 167, 167);" class="pb-2">« {{ 'FOOTER.CONTACT.WHATSAPP' | translate }}: <div class="text-secondary">009612345678932</div></li>
+          <li style="color: rgb(172, 167, 167);" class="pb-2">« {{ 'FOOTER.CONTACT.MOBILE' | translate }}: <div class="text-secondary">009612345678932</div></li>
+          <li style="color: rgb(172, 167, 167);" class="pb-2">« {{ 'FOOTER.CONTACT.EMAIL' | translate }}: <div class="text-secondary"><a href="#" class="footer-link">https://salla.sa </a></div></li>
+        </ul>
+      </div>
+
+      <!-- Social Media -->
+      <div class="col">
+        <h6 class="footer-title">{{ 'FOOTER.FOLLOW_US' | translate }}</h6>
+
+        <div class="d-flex gap-2 justify-content-end flex-wrap">
+          <a href="#" class="social-icon facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social-icon twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="social-icon instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" class="social-icon snapchat">
+            <i class="fab fa-snapchat-ghost"></i>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  <div class="payment-section mt-4">
+    <div class="payment-bar">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+        <div
+          class="d-flex flex-wrap align-items-center gap-3 justify-content-center justify-content-md-start mb-3 mb-md-0">
+          <img src="assets/images/mada.jpg" alt="mada" class="payment-icon">
+          <img src="assets/images/paypal.jpg" alt="paypal" class="payment-icon">
+          <img src="assets/images/mastercard.jpg" alt="mastercard" class="payment-icon">
+          <img src="assets/images/visa.jpg" alt="visa" class="payment-icon">
+
+          <div class="d-flex align-items-center gap-2">
+            <img src="assets/images/tax.jpg" alt="zatca" style="height: 1.5rem;" />
+            <span class="tax-number">546987552 : {{ 'FOOTER.TAX_NUMBER' | translate }}</span>
+          </div>
+        </div>
+        <div class="copyright">
+    {{ 'FOOTER.COPYRIGHT' | translate }}
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,108 @@
+body {
+  font-family: 'Tajawal', 'Arial', sans-serif;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  padding: 3rem 0;
+}
+
+.footer {
+  background-color: white;
+  color: #666;
+}
+
+.footer-title {
+  color: #171717;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.footer-link {
+  color: #666;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  display: inline-block;
+}
+
+.footer-link:hover {
+  color:  #82db98;
+}
+
+.footer-link.active {
+  color: #3b82f6;
+}
+
+.social-icon {
+  width: 2rem;
+  height: 2rem;
+  background-color: #f3f4f6;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #666;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  background-color: white;
+  color: #82db98;
+  border: #82db98 0.5px solid;
+}
+
+.payment-section {
+  border-top: 1px solid #e5e7eb;
+}
+
+.payment-bar {
+  background-color: #060606;
+  color: white;
+  padding: 1rem;
+}
+
+.payment-icon {
+  height: 1.5rem;
+  background-color: white;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+}
+
+.tax-number {
+  font-size: 0.875rem;
+}
+
+.copyright {
+  font-size: 0.875rem;
+}
+
+/* RTL specific adjustments */
+.footer-section ul {
+  padding-right: 0;
+  list-style-position: inside;
+}
+
+@media (max-width: 767.98px) {
+  .footer-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .payment-bar {
+    text-align: center;
+  }
+
+  .payment-icons {
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+}

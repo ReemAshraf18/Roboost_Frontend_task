@@ -7,12 +7,14 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpLoaderFactory } from '../app.module';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { PriceFormatPipe } from './pipes/price-format.pipe';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
     LanguageSwitcherComponent,
     HeaderComponent,
     ProductCardComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
@@ -23,6 +25,7 @@ import { PriceFormatPipe } from './pipes/price-format.pipe';
   exports: [
     LanguageSwitcherComponent,
     HeaderComponent,
+    FooterComponent,
     ProductCardComponent,
     PriceFormatPipe,
     CommonModule,

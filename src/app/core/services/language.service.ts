@@ -18,7 +18,14 @@ export class LanguageService {
   setLanguage(lang: string): void {
     this.currentLanguage.set(lang);
     this.isRTL.set(lang === 'ar');
-    this.translate.use(lang);
+    this.translate.use(lang).subscribe({
+      next: () => {
+        console.log(`✅ Language "${lang}" loaded successfully`);
+      },
+      error: (err) => {
+        console.error(`❌ Failed to load language "${lang}"`, err);
+      }
+    });
     localStorage.setItem('language', lang);
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
