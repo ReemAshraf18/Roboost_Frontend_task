@@ -10,7 +10,10 @@
     "USERNAME": "Username",
     "CONFIRM_PASSWORD": "Confirm Password",
     "REGISTER": "Register",
-    "HAVE_ACCOUNT": "Already have an account? Login"
+    "FORGOT_PASSWORD": "Forgot Password?",
+    "LOGIN_SUBTITLE": "Log in to track your orders and easily access your favorites list.",
+    "HAVE_ACCOUNT": "Already have an account? Login",
+    "REGISTER_SUBTITLE": "Register to track your orders and easily access your favorites list."
   },
   "VALIDATION": {
     "REQUIRED": "This field is required",

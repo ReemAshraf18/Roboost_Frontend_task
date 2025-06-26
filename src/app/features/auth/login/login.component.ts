@@ -1,31 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   standalone: false,
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   private fb: FormBuilder;
   constructor(
     fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+
   ) {
     this.fb = fb;
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required]],
       password: ['', Validators.required],
-      rememberMe: [false]
+      rememberMe: [true]
     });
   }
-  loginForm: ReturnType<FormBuilder['group']>;
+    loginForm: ReturnType<FormBuilder['group']>;
 
   isLoading = false;
   errorMessage = '';
+
+  ngOnInit(): void {
+    const savedUsername = localStorage.getItem('savedUsername');
+    console.log('Loaded saved credentials:', savedUsername); 
+
+    if (savedUsername) {
+      this.loginForm.patchValue({
+        username: savedUsername,
+        rememberMe: true
+      });
+    }
+  }
+
+
 
 
 
@@ -35,14 +51,23 @@ export class LoginComponent {
     this.isLoading = true;
     this.errorMessage = '';
 
-    const { email, password, rememberMe } = this.loginForm.value;
+    const { username, password, rememberMe } = this.loginForm.value;
 
-    this.authService.login({ email: email!, password: password! }).subscribe({
-      next: () => {
+    this.authService.login({ username: username!, password: password! }).subscribe({
+      next: (res) => {
         this.isLoading = false;
+        this.isLoading = false;
+
         if (rememberMe) {
-          // Implement remember me functionality
+          localStorage.setItem('savedUsername', username!);
+          console.log('Saved to localStorage:', localStorage.getItem('savedUsername'));
+
+        } else {
+          localStorage.removeItem('savedUsername');
         }
+
+        localStorage.setItem('auth_toke', res.token);
+        this.router.navigate(['/']);
       },
       error: (err) => {
         this.isLoading = false;

@@ -1,49 +1,93 @@
-<div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6 col-lg-4">
-      <div class="card shadow-sm">
-        <div class="card-body p-4">
-          <h2 class="card-title text-center mb-4">{{ 'AUTH.LOGIN_TITLE' | translate }}</h2>
-          
-          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <div class="mb-3">
-              <label for="email" class="form-label">{{ 'AUTH.EMAIL' | translate }}</label>
-              <input type="email" class="form-control" id="email" formControlName="email"
-                     [class.is-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-              <div class="invalid-feedback" *ngIf="loginForm.get('email')?.hasError('required')">
-                {{ 'VALIDATION.REQUIRED' | translate }}
-              </div>
-              <div class="invalid-feedback" *ngIf="loginForm.get('email')?.hasError('email')">
-                {{ 'VALIDATION.INVALID_EMAIL' | translate }}
+<div class="login-container">
+  <div class="container-fluid h-100">
+    <div class="row h-100">
+      <!-- Right side - Login Form -->
+      <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center form-side">
+        <div class="login-form-container">
+          <!-- Header -->
+          <div class="form-header text-end mb-4">
+            <div class="nav-links mb-3 d-flex justify-content-start align-items-center">
+              <a routerLink="/auth/login" class="nav-link active">{{ 'AUTH.LOGIN_TITLE' | translate }}</a>
+              <span class="mx-2">/</span>
+              <a routerLink="/auth/register" class="nav-link">{{ 'AUTH.REGISTER_TITLE' | translate }}</a>
+            </div>
+            <h2 class="form-title">{{ 'AUTH.HAVE_ACCOUNT' | translate }}</h2>
+            <p class="form-subtitle">{{ 'AUTH.LOGIN_SUBTITLE' | translate }}</p>
+          </div>
+
+          <!-- Login Form -->
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+            <div class="form-group mb-3">
+              <label for="username" class="form-label text-end d-block">{{ 'AUTH.EMAIL' | translate }}</label>
+              <div class="input-wrapper">
+                <input 
+                  type="text" 
+                  class="form-control text-end" 
+                  id="email"
+                  placeholder="{{ 'AUTH.EMAIL' | translate }}"
+                  formControlName="username"
+                  [class.is-invalid]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
+                />
+                <span class="input-icon">
+                  <i class="fas fa-envelope"></i>
+                </span>
+                <div class="invalid-feedback" *ngIf="loginForm.get('username')?.hasError('required')">
+                  {{ 'VALIDATION.REQUIRED' | translate }}
+                </div>
+                <div class="invalid-feedback" *ngIf="loginForm.get('username')?.hasError('email')">
+                  {{ 'VALIDATION.INVALID_EMAIL' | translate }}
+                </div>
               </div>
             </div>
 
-            <div class="mb-3">
-              <label for="password" class="form-label">{{ 'AUTH.PASSWORD' | translate }}</label>
-              <input type="password" class="form-control" id="password" formControlName="password"
-                     [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-              <div class="invalid-feedback" *ngIf="loginForm.get('password')?.hasError('required')">
-                {{ 'VALIDATION.REQUIRED' | translate }}
+            <div class="form-group mb-3">
+              <label for="password" class="form-label text-end d-block">{{ 'AUTH.PASSWORD' | translate }}</label>
+              <div class="input-wrapper">
+                <input 
+                  type="password" 
+                  class="form-control text-end" 
+                  id="password"
+                  placeholder="••••••••••••"
+                  formControlName="password"
+                  [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                />
+                <span class="input-icon">
+                  <i class="fas fa-lock"></i>
+                </span>
+                <div class="invalid-feedback" *ngIf="loginForm.get('password')?.hasError('required')">
+                  {{ 'VALIDATION.REQUIRED' | translate }}
+                </div>
               </div>
             </div>
 
-            <div class="mb-3 form-check">
-              <input type="checkbox" class="form-check-input" id="rememberMe" formControlName="rememberMe">
-              <label class="form-check-label" for="rememberMe">{{ 'AUTH.REMEMBER_ME' | translate }}</label>
+            <div class="form-options d-flex justify-content-between align-items-center">
+              <a href="#" class="forgot-password">{{ 'AUTH.FORGOT_PASSWORD' | translate }}</a>
+              <div class="remember-me form-check">
+                <input type="checkbox" id="rememberMe" class="form-check-input me-2" formControlName="rememberMe" />
+                <label for="rememberMe" class="form-check-label">{{ 'AUTH.REMEMBER_ME' | translate }}</label>
+              </div>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid || isLoading">
+            <button type="submit" class="btn btn-login w-100 mb-4" [disabled]="loginForm.invalid || isLoading">
               <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-1"></span>
               {{ 'AUTH.LOGIN' | translate }}
             </button>
 
-            <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+            <div *ngIf="errorMessage" class="alert alert-danger">
               {{ errorMessage }}
             </div>
-          </form>
 
-          <div class="text-center mt-3">
-            <a routerLink="/auth/register">{{ 'AUTH.NO_ACCOUNT' | translate }}</a>
+            <div class="signup-link text-center">
+              <a routerLink="/auth/register" class="create-account">{{ 'AUTH.NO_ACCOUNT' | translate }}</a>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- Left side - Illustration -->
+      <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center illustration-side">
+        <div class="illustration-content">
+          <div class="person-illustration">
+            <img src="assets/images/Login.png" alt="Login Illustration" class="img-fluid" />
           </div>
         </div>
       </div>

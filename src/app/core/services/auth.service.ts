@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { Route, Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
@@ -10,19 +10,33 @@ export class AuthService {
   private readonly USER_KEY = 'user_data';
   isAuthenticated = signal<boolean>(false);
   currentUser = signal<any>(null);
+  private API_URL = 'https://dummyjson.com/users';
 
   constructor(private http: HttpClient,
     private router: Router) {
     this.checkAuthState();
   }
-  login(credentials: { email: string, password: string }): Observable<any> {
-      return this.http.post('https://dummyjson.com/auth/login', credentials).pipe(
-      tap((response: any) => {
-        localStorage.setItem(this.AUTH_KEY, response.token);
-        localStorage.setItem(this.USER_KEY, JSON.stringify(response));
-        this.isAuthenticated.set(true);
-        this.currentUser.set(response);
-        this.router.navigate(['/']);
+ login(credentials: { username: string; password: string }): Observable<any> {
+    return this.http.get<any>(this.API_URL).pipe(
+      map(response => {
+        const users = response.users;
+        const matchedUser = users.find(
+          (user: any) =>
+            user.username === credentials.username &&
+            user.password === credentials.password
+        );
+
+        if (matchedUser) {
+          const fakeToken = 'fake-token-' + matchedUser.id;
+          return { token: fakeToken, user: matchedUser };
+        } else {
+          throw new Error('Invalid username or password');
+        }
+      }),
+      catchError(err => {
+        return throwError(() => ({
+          error: { message: err.message || 'Login failed' }
+        }));
       })
     );
   }
@@ -46,5 +60,14 @@ export class AuthService {
   getAuthToken(): string | null {
   return localStorage.getItem('auth_token');
 }
+register(userData: {
+  name: string;
+  email: string;
+  password: string;
+}): Observable<any> {
+  return this.http.post('https://dummyjson.com/users/add', userData);
+}
+
+
   
 }

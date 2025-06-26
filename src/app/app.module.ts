@@ -11,8 +11,9 @@ import { SharedModule } from './shared/shared.module';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { ProductsModule } from './features/products/products.module';
-import { AuthModule } from './features/auth/auth.module';
 import { CartModule } from './features/cart/cart.module';
+
+
 import { HomeComponent } from './features/home/home.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -38,6 +39,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CoreModule,
     SharedModule,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }

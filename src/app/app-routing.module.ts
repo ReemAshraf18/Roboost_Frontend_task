@@ -5,7 +5,6 @@ import { HomeComponent } from './features/home/home.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '**', redirectTo: '/home' },
    { 
     path: 'products', 
     loadChildren: () => import('../app/features/products/products.module').then(m => m.ProductsModule)
@@ -18,6 +17,8 @@ const routes: Routes = [
     path: 'cart', 
     loadChildren: () => import('../app/features/cart/cart.module').then(m => m.CartModule)
   },
+    { path: '**', redirectTo: '/home' }
+
 ];
 
 @NgModule({

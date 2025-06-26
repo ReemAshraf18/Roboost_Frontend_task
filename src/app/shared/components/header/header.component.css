@@ -193,7 +193,8 @@ body {
 .navigation {
     background: #000000;
     padding: 0;
-    height: 3rem;
+    height: auto;
+    /* make the navigation bar be hidden when the page become smaller as phone screen */
 }
 
 
@@ -227,13 +228,14 @@ body {
     position: absolute;
     top: 100%;
     right: 0;
-    background: white;
+    background: rgb(170, 228, 206);
     border: 1px solid #e5e7eb4e;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     min-width: 200px;
     display: none;
     z-index: 1000;
     margin-top: 0;
+
 }
 
 .nav-item:hover .dropdown-menu {

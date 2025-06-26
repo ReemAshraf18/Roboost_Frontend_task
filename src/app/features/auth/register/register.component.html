@@ -1,1 +1,123 @@
-<p>register works!</p>
+<div class="login-container">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Right side - Login Form -->
+            <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center form-side">
+                <div class="login-form-container">
+                    <!-- Header -->
+                    <div class="form-header text-end mb-4">
+                        <div class="nav-links mb-3 d-flex justify-content-start align-items-center">
+                            <a routerLink="/auth/login" class="nav-link active">{{ 'AUTH.LOGIN_TITLE' | translate }}</a>
+                            <span class="mx-2">/</span>
+                            <a routerLink="/auth/register" class="nav-link">{{ 'AUTH.REGISTER_TITLE' | translate }}</a>
+                        </div>
+                        <h2 class="form-title">{{ 'AUTH.NO_ACCOUNT' | translate }}</h2>
+                        <p class="form-subtitle">{{ 'AUTH.REGISTER_SUBTITLE' | translate }}</p>
+                    </div>
+
+                    <!-- Login Form -->
+                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="login-form">
+                        <div class="form-group mb-3">
+                            <label for="username" class="form-label text-end d-block">{{ 'AUTH.USERNAME' | translate
+                                }}</label>
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control text-end" id="name"
+                                    placeholder="{{ 'AUTH.USERNAME' | translate }}" formControlName="username"
+                                    [class.is-invalid]="registerForm.get('username')?.invalid && registerForm.get('username')?.touched" />
+                                <span class="input-icon">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                                <div class="invalid-feedback"
+                                    *ngIf="registerForm.get('username')?.hasError('required')">
+                                    {{ 'VALIDATION.REQUIRED' | translate }}
+                                </div>
+                                <div class="invalid-feedback" *ngIf="registerForm.get('username')?.hasError('email')">
+                                    {{ 'VALIDATION.INVALID_EMAIL' | translate }}
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group mb-3">
+                            <label for="username" class="form-label text-end d-block">{{ 'AUTH.EMAIL' | translate
+                                }}</label>
+                            <div class="input-wrapper">
+                                <input type="email" class="form-control text-end" id="email"
+                                    placeholder="{{ 'AUTH.USERNAME' | translate }}" formControlName="email"
+                                    [class.is-invalid]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" />
+                                <span class="input-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <div class="invalid-feedback" *ngIf="registerForm.get('email')?.hasError('required')">
+                                    {{ 'VALIDATION.REQUIRED' | translate }}
+                                </div>
+                                <div class="invalid-feedback" *ngIf="registerForm.get('email')?.hasError('email')">
+                                    {{ 'VALIDATION.INVALID_EMAIL' | translate }}
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group mb-3">
+                            <label for="password" class="form-label text-end d-block">{{ 'AUTH.PASSWORD' | translate
+                                }}</label>
+                            <div class="input-wrapper">
+                                <input type="password" class="form-control text-end" id="password"
+                                    placeholder="••••••••••••" formControlName="password"
+                                    [class.is-invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" />
+                                <span class="input-icon">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                                <div class="invalid-feedback"
+                                    *ngIf="registerForm.get('password')?.hasError('required')">
+                                    {{ 'VALIDATION.REQUIRED' | translate }}
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group mb-3">
+                            <label for="password" class="form-label text-end d-block">{{ 'AUTH.CONFIRM_PASSWORD' |
+                                translate }}</label>
+                            <div class="input-wrapper">
+                                <input type="password" class="form-control text-end" id="confirmPassword"
+                                    placeholder="••••••••••••" formControlName="confirmPassword"
+                                    [class.is-invalid]="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched" />
+                                <span class="input-icon">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                                <div class="invalid-feedback"
+                                    *ngIf="registerForm.errors?.['passwordMismatch'] && registerForm.get('confirmPassword')?.touched">
+                                    {{ 'VALIDATION.PASSWORD_MISMATCH' | translate }}
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <button type="submit" class="btn btn-login w-100 mb-4"
+                            [disabled]="registerForm.invalid || isLoading">
+                            <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-1"></span>
+                            {{ 'AUTH.REGISTER' | translate }}
+                        </button>
+
+                        <div *ngIf="errorMessage" class="alert alert-danger">
+                            {{ errorMessage }}
+                        </div>
+
+                        <div class="signup-link text-center">
+                            <a routerLink="/auth/login" class="create-account">{{ 'AUTH.HAVE_ACCOUNT' | translate }}</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Left side - Illustration -->
+            <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center illustration-side">
+                <div class="illustration-content">
+                    <div class="person-illustration">
+                        <img src="assets/images/register.jpg" alt="Login Illustration" class="img-fluid" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
