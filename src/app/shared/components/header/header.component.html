@@ -42,9 +42,10 @@
 
         <div class="col">
           <div class="search-container position-relative">
-            <input type="text" class="form-control search-input ps-3"
-              placeholder="{{ 'HEADER.SEARCH_PLACEHOLDER' | translate }}">
-            <i class="fas fa-search search-icon position-absolute top-50 translate-middle-y me-3"></i>
+            <input type="text" class="form-control search-input ps-3" [(ngModel)]="searchTerm"
+              (keyup.enter)="onSearch()" placeholder="{{ 'HEADER.SEARCH_PLACEHOLDER' | translate }}">
+            <button class="btn position-absolute top-50 translate-middle-y fas fa-search search-icon p-2" (click)="onSearch()">
+            </button>
           </div>
         </div>
 

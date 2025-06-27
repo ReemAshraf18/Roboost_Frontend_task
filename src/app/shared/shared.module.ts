@@ -8,6 +8,7 @@ import { HttpLoaderFactory } from '../app.module';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { PriceFormatPipe } from './pipes/price-format.pipe';
 import { FooterComponent } from './components/footer/footer.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FooterComponent } from './components/footer/footer.component';
     PriceFormatPipe,
     HttpClientModule,
     TranslateModule,
+    FormsModule,
   ],
   exports: [
     LanguageSwitcherComponent,

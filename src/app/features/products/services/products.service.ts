@@ -70,4 +70,7 @@ export class ProductsService {
       map(response => response.products)
     );
   }
+    searchProducts(query: string): Observable<any> {
+    return this.http.get(`https://dummyjson.com/products/search?q=${query}`);
+  }
 }

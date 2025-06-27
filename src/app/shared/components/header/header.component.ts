@@ -7,7 +7,7 @@ import { CartService } from '../../../features/cart/services/cart.service';
 import { LanguageService } from '../../../core/services/language.service';
 import { LanguageSwitcherComponent } from '../language-switcher/language-switcher.component';
 import { computed, Signal } from '@angular/core';
-
+import { Product, ProductsService } from '../../../features/products/services/products.service';
 @Component({
   selector: 'app-header',
   standalone: false,
@@ -16,12 +16,16 @@ import { computed, Signal } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent {
+  searchTerm: string = '';
+  searchResults: Product[] = [];
+
   totalItems!: Signal<number>;
   subtotal!: Signal<number>;
   constructor(
     public authService: AuthService,
     public cartService: CartService,
     public languageService: LanguageService,
+    private productsService: ProductsService,
     private router: Router
   ) {
     this.totalItems = this.cartService.totalItems;
@@ -70,7 +74,23 @@ export class HeaderComponent {
       subItems: ['HEADER.NAV.SUBCATEGORY1', 'HEADER.NAV.SUBCATEGORY2', 'HEADER.NAV.SUBCATEGORY3']
     }
   ];
+  onSearch() {
+    if (!this.searchTerm.trim()) return;
 
+
+    this.productsService.searchProducts(this.searchTerm).subscribe({
+      next: (res) => {
+        this.searchResults = res.products;
+        console.log('Search results:', this.searchResults);
+        this.router.navigate(['/products'], {
+          queryParams: { q: this.searchTerm }
+        });
+      },
+      error: (err) => {
+        console.error('Search error', err);
+      }
+    });
+  }
   toggleLanguage() {
     const currentLang = this.languageService.currentLanguage();
     const nextLang = currentLang === 'ar' ? 'en' : 'ar';
