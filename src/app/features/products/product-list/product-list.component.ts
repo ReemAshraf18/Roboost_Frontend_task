@@ -172,5 +172,8 @@ changePage(page: number): void {
     const end = start + this.itemsPerPage;
     return this.filteredProducts.slice(start, end);
   }
+  goToProduct(productId: number): void {
+  this.router.navigate(['/products', productId]);
+}
 
 }

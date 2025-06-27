@@ -8,72 +8,101 @@
     <!-- Product Images -->
     <div class="col-md-6">
       <div class="mb-3">
-        <img [src]="product.images[currentImageIndex]" 
-             [alt]="product.title"
-             class="img-fluid rounded">
+        <img [src]="product.images[currentImageIndex]" [alt]="product.title" class="img-fluid rounded" />
       </div>
       <div class="row g-2">
-        <div *ngFor="let image of product.images; let i = index" 
-             class="col-3">
-          <img [src]="image" 
-               [alt]="product.title + ' thumbnail ' + i"
-               class="img-thumbnail cursor-pointer"
-               [class.border-primary]="currentImageIndex === i"
-               (click)="changeImage(i)">
+        <div *ngFor="let image of product.images; let i = index" class="col-3">
+          <img [src]="image" [alt]="product.title + ' thumbnail ' + i" class="img-thumbnail cursor-pointer"
+            [class.border-primary]="currentImageIndex === i" (click)="changeImage(i)" />
         </div>
       </div>
     </div>
 
-    <!-- Product Info -->
+    <!-- Product Details -->
     <div class="col-md-6">
-      <h2>{{ product.title }}</h2>
-      <div class="d-flex align-items-center mb-3">
-        <span class="badge bg-success me-2">{{ product.rating }} ★</span>
-        <span class="text-muted">{{ product.brand }}</span>
-      </div>
+      <h1 class="product-title">{{ product.title }}</h1>
 
-      <div class="mb-4">
-        <h4 class="text-primary">
-          {{ product.price | priceFormat }}
-          <small *ngIf="product.discountPercentage > 0" 
-                 class="text-danger text-decoration-line-through ms-2">
-            {{ product.price * (1 + product.discountPercentage/100) | priceFormat }}
-          </small>
-        </h4>
-        <span *ngIf="product.discountPercentage > 0" 
-              class="badge bg-danger">
-          Save {{ product.discountPercentage }}%
-        </span>
-      </div>
-
-      <p class="mb-4">{{ product.description }}</p>
-
-      <div class="mb-4">
-        <span class="d-block mb-2">
-          <strong>Availability:</strong> 
-          <span [class.text-success]="product.stock > 0" 
-                [class.text-danger]="product.stock <= 0">
-            {{ product.stock > 0 ? 'In Stock (' + product.stock + ')' : 'Out of Stock' }}
+      <div class="product-meta d-flex justify-content-between align-items-center mb-2">
+        <div class="price-info">
+          <span class="original-price">{{ product.brand }}</span>
+          <div class="discount-badge" *ngIf="product.discountPercentage > 0">
+            <i class="fas fa-tag"></i>
+          </div>
+        </div>
+        <div class="availability">
+          <i class="fas fa-check-circle" *ngIf="product.stock > 0"></i>
+          <i class="fas fa-times-circle" *ngIf="product.stock <= 0"></i>
+          <span [class.text-success]="product.stock > 0" [class.text-danger]="product.stock <= 0">
+            {{ product.stock > 0 ? 'المتبقي ' + product.stock + ' وحدة' : 'نفد من المخزون' }}
           </span>
-        </span>
-        <span class="d-block mb-2">
-          <strong>Category:</strong> {{ product.category }}
+        </div>
+      </div>
+
+      <div class="ratings mb-3">
+        <div class="stars">
+          <i class="fas fa-star" *ngFor="let star of [1,2,3,4,5]; let i = index"
+            [class.fas]="i < Math.floor(product.rating)" [class.far]="i >= Math.floor(product.rating)"></i>
+        </div>
+        <span class="rating-text">{{ product.rating }} تقييم</span>
+      </div>
+
+      <div class="product-actions mb-3">
+        <button class="action-button me-2">
+          <i class="fas fa-share-alt"></i> مشاركة المنتج
+        </button>
+        <button class="action-button">
+          <i class="fas fa-heart"></i> أضف للمفضلة
+        </button>
+      </div>
+
+      <div class="product-description mb-3">
+        {{ product.description }}
+      </div>
+      <a href="#" class="show-more text-primary">عرض المزيد</a>
+
+      <div class="product-tags mb-3">
+        <span class="tag">{{ product.category }}</span>
+        <span class="tag" *ngIf="product.discountPercentage > 0">تخفيضات</span>
+      </div>
+
+      <div class="quantity-section mb-3">
+        <span class="quantity-label d-block mb-1">حدد الكمية</span>
+        <div class="quantity-controls d-flex align-items-center">
+          <button class="quantity-btn btn btn-outline-secondary" (click)="decreaseQuantity()">-</button>
+          <input type="number" [(ngModel)]="quantity" min="1" class="quantity-input form-control mx-2 text-center"
+            style="width: 80px;" />
+          <button class="quantity-btn btn btn-outline-secondary" (click)="increaseQuantity()">+</button>
+        </div>
+      </div>
+
+      <div class="price-section mb-3">
+        <h4 class="text-success">{{ product.price | priceFormat }}</h4>
+        <small *ngIf="product.discountPercentage > 0" class="text-danger text-decoration-line-through">
+          {{ product.price * (1 + product.discountPercentage/100) | priceFormat }}
+        </small>
+        <span *ngIf="product.discountPercentage > 0" class="badge bg-danger ms-2">
+          وفر {{ product.discountPercentage }}%
         </span>
       </div>
 
-      <button class="btn btn-primary btn-lg me-2"
-              (click)="addToCart()"
-              [disabled]="product.stock <= 0">
-        Add to Cart
-      </button>
+      <div class="purchase-buttons d-flex gap-2">
+        <button class="btn" style="background-color: #62D0B6; color: white;"  (click)="addToCart()" [disabled]="product.stock <= 0">
+          <i class="fas fa-shopping-cart"></i> أضف للسلة
+        </button>
+        <button class="btn btn-outline-secondary" [disabled]="product.stock <= 0">
+          <i class="fas fa-shopping-bag"></i> الشراء السريع
+        </button>
+      </div>
     </div>
   </div>
+
 
   <!-- Related Products -->
   <div *ngIf="relatedProducts.length > 0" class="mt-5">
     <h3 class="mb-4">Related Products</h3>
     <div class="row">
-      <div *ngFor="let product of relatedProducts" class="col-lg-3 col-md-4 col-6 mb-4">
+      <div *ngFor="let product of relatedProducts" (click)="goToProduct(product.id)" style="cursor: pointer;"
+        class="col-lg-3 col-md-4 col-6 mb-4">
         <app-product-card [product]="product"></app-product-card>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map, shareReplay, tap } from 'rxjs';
+import { DetailsProduct } from '../../../core/models/product.interface';
 
 export interface Product {
   id: number;
@@ -24,6 +25,7 @@ export interface Product {
 export class ProductsService {
   private productsCache = signal<Product[]>([]);
   private categoriesCache = signal<string[]>([]);
+  private detailsCache = signal<DetailsProduct[]>([]);
 
   constructor(private http: HttpClient) { }
 
@@ -36,16 +38,15 @@ export class ProductsService {
   );
 }
 
-    getProductById(id: number): Observable<Product> {
-    const cachedProduct = this.productsCache().find(p => p.id === id);
+    getProductById(id: number): Observable<DetailsProduct> {
+    const cachedProduct = this.detailsCache().find(p => p.id === id);
     if (cachedProduct) {
       return new Observable(observer => {
         observer.next(cachedProduct);
         observer.complete();
       });
     }
-
-    return this.http.get<Product>(`https://dummyjson.com/products/${id}`);
+    return this.http.get<DetailsProduct>(`https://dummyjson.com/products/${id}`);
   }
     getCategories(): Observable<string[]> {
     if (this.categoriesCache().length > 0) {
