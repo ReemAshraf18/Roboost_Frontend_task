@@ -8,13 +8,12 @@
     "NO_ACCOUNT": "جديد معنا؟ سجل الآن",
     "REGISTER_TITLE": "تسجيل حساب جديد",
     "USERNAME": "اسم المستخدم",
-    "FORGOT_PASSWORD":"هل نسيت كلمة المرور؟",
+    "FORGOT_PASSWORD": "هل نسيت كلمة المرور؟",
     "CONFIRM_PASSWORD": "تأكيد كلمة المرور",
     "REGISTER": "تسجيل",
     "LOGIN_SUBTITLE": "قم بتسجيل الدخول حتى تتبع طلباتك وتصل بسهولة إلى قائمة مفضلاتك.",
     "HAVE_ACCOUNT": "لديك حساب بالفعل؟ سجل الدخول",
     "REGISTER_SUBTITLE": "يتيح لك التسجيل في هذا الموقع الوصول إلى حالة طلبك وسجله. ما عليك سوى ملء الحقول أدناه ، وسنقوم بإنشاء حساب جديد لك في أسرع وقت."
-
   },
   "VALIDATION": {
     "REQUIRED": "هذا الحقل مطلوب",
@@ -30,7 +29,23 @@
     "PRICE_RANGE": "نطاق السعر",
     "MIN_RATING": "الحد الأدنى للتقييم",
     "ALL_CATEGORIES": "جميع الفئات",
-    "RESET_FILTERS": "إعادة تعيين الفلاتر"
+    "RESET_FILTERS": "إعادة تعيين الفلاتر",
+    "RATING": "التقييم",
+    "NO_RESULTS": "لم يتم العثور على منتجات تطابق المعايير المحددة",
+    "TOTAL_PRODUCTS": "المنتجات ({{count}})"
+  },
+  "PRODUCT_CARD": {
+    "DISCOUNT": "خصم {{discount}}%",
+    "ADD_TO_CART": "أضف للسلة",
+    "SAR": "ريال"
+  },
+  "FILTERS": {
+    "CATEGORY": "الفئة",
+    "BRAND": "الماركة",
+    "PRICE": "السعر",
+    "FROM": "من {{min}}",
+    "TO": "إلى {{max}}",
+    "RATING_AND_ABOVE": "{{rating}} فأكثر"
   },
   "CART": {
     "TITLE": "سلة التسوق",
@@ -49,7 +64,6 @@
       "LINE1": "متجر سلة من افضل المتاجر التي تقوم ببيع المنتجات الرقمية بأفضل الاسعار والتصاميم",
       "LINE2": "تسوق الآن واطلع على المزيد من المنتجات واستمتع بأفضل العروض والخصومات"
     },
-
     "MY_ACCOUNT": {
       "TITLE": "حسابي",
       "MY_ACCOUNT": "حسابي",
@@ -86,15 +100,15 @@
     "CURRENCY": "ريال",
     "CART": "سلة المشتريات",
     "NAV": {
-    "ALL_PRODUCTS": "كل المنتجات",
-    "ELECTRONICS": "إلكترونيات",
-    "MOBILES": "موبايلات",
-    "Cameras": "كاميرات مراقبة",
-    "Digital_Watches": "ساعات رقمية",
-    "Digita_Cameras": "كاميرات رقمية",
-    "ACCESSORIES": "اكسسوارات",
-    "MONITORS": "شاشات كمبيوتر",
-    "HEADPHONES": "سماعات",
+      "ALL_PRODUCTS": "كل المنتجات",
+      "ELECTRONICS": "إلكترونيات",
+      "MOBILES": "موبايلات",
+      "Cameras": "كاميرات مراقبة",
+      "Digital_Watches": "ساعات رقمية",
+      "Digita_Cameras": "كاميرات رقمية",
+      "ACCESSORIES": "اكسسوارات",
+      "MONITORS": "شاشات كمبيوتر",
+      "HEADPHONES": "سماعات",
       "SUBCATEGORY1": "فئة فرعية 1",
       "SUBCATEGORY2": "فئة فرعية 2",
       "SUBCATEGORY3": "فئة فرعية 3"

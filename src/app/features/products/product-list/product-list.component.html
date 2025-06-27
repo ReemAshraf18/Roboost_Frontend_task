@@ -1,24 +1,111 @@
-<div class="container mt-4">
+<div class="container-fluid" dir="rtl">
   <div class="row">
-    <!-- Filter Section -->
-    <div class="col-md-3">
-      <app-product-filter [categories]="categories"></app-product-filter>
+    <!-- Sidebar Filters -->
+    <div class="col-lg-3 col-md-4 mb-4">
+      <div class="filters-sidebar">
+        <!-- Category Filter -->
+        <h5 class="filter-title">{{ 'FILTERS.CATEGORY' | translate }}</h5>
+        <div class="filter-section" *ngIf="categories?.length">
+          <div class="form-check" *ngFor="let category of categories">
+            <input class="form-check-input" type="checkbox"
+                   [id]="'category-' + category"
+                   (change)="onCategoryChange(category, $event)">
+            <label class="form-check-label" [for]="'category-' + category">
+              {{ category }}
+            </label>
+            <span class="item-count">({{ (products | filter: 'category': category).length }})</span>
+          </div>
+        </div>
+
+        <!-- Brand Filter -->
+        <h5 class="filter-title">{{ 'FILTERS.BRAND' | translate }}</h5>
+        <div class="filter-section" *ngIf="brands?.length">
+          <div class="form-check" *ngFor="let brand of brands">
+            <input class="form-check-input" type="checkbox"
+                   [id]="'brand-' + brand"
+                   (change)="onBrandChange(brand, $event)">
+            <label class="form-check-label" [for]="'brand-' + brand">
+              {{ brand }}
+            </label>
+            <span class="item-count">({{ (products | filter: 'brand': brand).length }})</span>
+          </div>
+        </div>
+
+        <!-- Price Filter -->
+        <h5 class="filter-title">{{ 'FILTERS.PRICE' | translate }}</h5>
+        <div class="filter-section">
+          <div class="price-range">
+            <div class="d-flex justify-content-between mb-2">
+              <span>{{ 'FILTERS.FROM' | translate:{ min: currentMinPrice } }}</span>
+              <span>{{ 'FILTERS.TO' | translate:{ max: currentMaxPrice } }}</span>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <input type="range" class="form-range"
+                       [min]="minPrice" [max]="maxPrice"
+                       [(ngModel)]="currentMinPrice"
+                       (input)="onPriceChange()">
+              </div>
+              <div class="col-6">
+                <input type="range" class="form-range"
+                       [min]="minPrice" [max]="maxPrice"
+                       [(ngModel)]="currentMaxPrice"
+                       (input)="onPriceChange()">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rating Filter -->
+        <h5 class="filter-title">{{ 'PRODUCTS.RATING' | translate }}</h5>
+        <div class="filter-section">
+          <div class="rating-filters">
+            <div class="form-check" *ngFor="let rating of [5,4,3,2,1]">
+              <input class="form-check-input" type="radio"
+                     name="rating" [id]="'rating-' + rating"
+                     [value]="rating"
+                     (change)="onRatingChange(rating)">
+              <label class="form-check-label d-flex align-items-center"
+                     [for]="'rating-' + rating">
+                <div class="stars me-2">
+                  <i class="fas fa-star text-warning" *ngFor="let star of [1,2,3,4,5]; let i = index"
+                     [class.text-muted]="i >= rating"></i>
+                </div>
+                {{ 'FILTERS.RATING_AND_ABOVE' | translate:{ rating: rating } }}
+              </label>
+              <span class="item-count">({{ (filteredProducts | filter: 'rating': rating).length }})</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Products List -->
-    <div class="col-md-9">
-      <div *ngIf="isLoading" class="text-center">
-        <div class="spinner-border text-primary"></div>
-        <p>Loading products...</p>
+    <!-- Products Grid -->
+    <div class="col-lg-9 col-md-8">
+      <div class="products-header mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+          <h4>{{ 'PRODUCTS.TOTAL_PRODUCTS' | translate:{ count: filteredProducts.length } }}</h4>
+          <div class="view-options">
+            <button class="btn btn-outline-secondary btn-sm me-2">
+              <i class="fas fa-th"></i>
+            </button>
+            <button class="btn btn-outline-secondary btn-sm">
+              <i class="fas fa-list"></i>
+            </button>
+          </div>
+        </div>
       </div>
 
       <div class="row">
-        <div *ngFor="let product of products" class="col-lg-4 col-md-6 mb-4">
-          <app-product-card 
-            [product]="product"
-            (addToCart)="addToCart($event)">
+        <div class="col-lg-4 col-md-6 col-sm-6 mb-4 h-100" *ngFor="let product of filteredProducts">
+          <app-product-card [product]="product"
+                           (addToCart)="addToCart($event)">
           </app-product-card>
         </div>
+      </div>
+
+      <div class="text-center mt-4" *ngIf="filteredProducts.length === 0">
+        <p class="text-muted">{{ 'PRODUCTS.NO_RESULTS' | translate }}</p>
       </div>
     </div>
   </div>

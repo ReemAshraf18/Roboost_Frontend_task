@@ -21,6 +21,8 @@
     "PASSWORD_MISMATCH": "Passwords do not match"
   },
   "PRODUCTS": {
+    "TITLE": "Products ({{count}})",
+    "NO_RESULTS": "No products found matching your criteria",
     "PRICE": "Price",
     "ADD_TO_CART": "Add to Cart",
     "CATEGORIES": "Categories",
@@ -29,7 +31,21 @@
     "PRICE_RANGE": "Price Range",
     "MIN_RATING": "Minimum Rating",
     "ALL_CATEGORIES": "All Categories",
-    "RESET_FILTERS": "Reset Filters"
+    "RESET_FILTERS": "Reset Filters",
+    "TOTAL_PRODUCTS": "Products ({{count}})"
+  },
+  "PRODUCT_CARD": {
+    "DISCOUNT": "Discount {{discount}}%",
+    "ADD_TO_CART": "Add to Cart",
+    "SAR": "SAR"
+  },
+  "FILTERS": {
+    "CATEGORY": "Category",
+    "BRAND": "Brand",
+    "PRICE": "Price",
+    "FROM": "From {{min}}",
+    "TO": "To {{max}}",
+    "RATING_AND_ABOVE": "{{rating}} & up"
   },
   "CART": {
     "TITLE": "Your Cart",
@@ -42,7 +58,7 @@
     "FREE_SHIPPING": "Free Shipping",
     "TOTAL": "Total"
   },
-   "FOOTER": {
+  "FOOTER": {
     "ABOUT": {
       "TITLE": "About the Store",
       "LINE1": "We aim to provide the best online shopping experience.",
@@ -72,7 +88,7 @@
     "TAX_NUMBER": "Tax Number",
     "COPYRIGHT": "All rights reserved © 2025"
   },
-    "HEADER": {
+  "HEADER": {
     "CONTACT_US": "Contact Us",
     "RETURN_POLICY": "Exchange & Return Policy",
     "COUNTRY": "Kingdom",
@@ -84,15 +100,15 @@
     "CURRENCY": "SAR",
     "CART": "Shopping Cart",
     "NAV": {
-    "ALL_PRODUCTS": "All Products",
-    "ELECTRONICS": "Electronics",
-    "MOBILES": "Mobiles",
-    "Cameras": "Surveillance Cameras",
-    "Digital_Watches": "Digital Watches",
-    "Digita_Cameras": "Digital Cameras",
-    "ACCESSORIES": "Accessories",
-    "MONITORS": "Computer Monitors",
-    "HEADPHONES": "Headphones",
+      "ALL_PRODUCTS": "All Products",
+      "ELECTRONICS": "Electronics",
+      "MOBILES": "Mobiles",
+      "Cameras": "Surveillance Cameras",
+      "Digital_Watches": "Digital Watches",
+      "Digita_Cameras": "Digital Cameras",
+      "ACCESSORIES": "Accessories",
+      "MONITORS": "Computer Monitors",
+      "HEADPHONES": "Headphones",
       "SUBCATEGORY1": "Subcategory 1",
       "SUBCATEGORY2": "Subcategory 2",
       "SUBCATEGORY3": "Subcategory 3"

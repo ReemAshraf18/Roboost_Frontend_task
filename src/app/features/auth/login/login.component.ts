@@ -24,14 +24,14 @@ export class LoginComponent implements OnInit {
       rememberMe: [true]
     });
   }
-    loginForm: ReturnType<FormBuilder['group']>;
+  loginForm: ReturnType<FormBuilder['group']>;
 
   isLoading = false;
   errorMessage = '';
 
   ngOnInit(): void {
     const savedUsername = localStorage.getItem('savedUsername');
-    console.log('Loaded saved credentials:', savedUsername); 
+    console.log('Loaded saved credentials:', savedUsername);
 
     if (savedUsername) {
       this.loginForm.patchValue({
@@ -63,11 +63,13 @@ export class LoginComponent implements OnInit {
           console.log('Saved to localStorage:', localStorage.getItem('savedUsername'));
 
         } else {
-          localStorage.removeItem('savedUsername');
+          sessionStorage.setItem('auth_token', res.token);
         }
 
-        localStorage.setItem('auth_toke', res.token);
-        this.router.navigate(['/']);
+        localStorage.setItem('auth_token', res.token);
+        localStorage.setItem('user_data', JSON.stringify(res.user));
+        this.authService.isAuthenticated.set(true);
+        this.router.navigate(['/products']);
       },
       error: (err) => {
         this.isLoading = false;

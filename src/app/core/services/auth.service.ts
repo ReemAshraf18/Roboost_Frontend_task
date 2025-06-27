@@ -16,7 +16,7 @@ export class AuthService {
     private router: Router) {
     this.checkAuthState();
   }
- login(credentials: { username: string; password: string }): Observable<any> {
+  login(credentials: { username: string; password: string }): Observable<any> {
     return this.http.get<any>(this.API_URL).pipe(
       map(response => {
         const users = response.users;
@@ -28,6 +28,7 @@ export class AuthService {
 
         if (matchedUser) {
           const fakeToken = 'fake-token-' + matchedUser.id;
+          this.isAuthenticated.set(true);
           return { token: fakeToken, user: matchedUser };
         } else {
           throw new Error('Invalid username or password');
@@ -49,7 +50,7 @@ export class AuthService {
   }
 
   private checkAuthState(): void {
-    const token = localStorage.getItem(this.AUTH_KEY);
+const token = localStorage.getItem(this.AUTH_KEY) || sessionStorage.getItem(this.AUTH_KEY);
     const userData = localStorage.getItem(this.USER_KEY);
     if (token && userData) {
       this.isAuthenticated.set(true);
@@ -58,16 +59,16 @@ export class AuthService {
   }
 
   getAuthToken(): string | null {
-  return localStorage.getItem('auth_token');
-}
-register(userData: {
-  name: string;
-  email: string;
-  password: string;
-}): Observable<any> {
-  return this.http.post('https://dummyjson.com/users/add', userData);
-}
+    return localStorage.getItem('auth_token');
+  }
+  register(userData: {
+    name: string;
+    email: string;
+    password: string;
+  }): Observable<any> {
+    return this.http.post('https://dummyjson.com/users/add', userData);
+  }
 
 
-  
+
 }
