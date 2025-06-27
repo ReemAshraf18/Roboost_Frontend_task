@@ -25,6 +25,15 @@ export class ProductListComponent implements OnInit {
   currentMaxPrice: number = 5000;
   minRating: number = 0;
   isLoading = true;
+  currentPage = 1;
+  itemsPerPage = 6;
+  totalPages = 0;
+  skip = 0;
+  limit = 30;
+  totalProducts = 0;
+
+
+
 
   constructor(
     private productsService: ProductsService,
@@ -59,13 +68,14 @@ export class ProductListComponent implements OnInit {
     this.loadCategories();
   }
 
-  loadProducts(): void {
-    this.productsService.getProducts().subscribe({
+  loadProducts(skip: number = 0, limit: number = 30): void {
+    this.productsService.getProducts(this.skip, this.limit).subscribe({
       next: (res) => {
 
-        this.products = res;
+        this.products = res.products || [];
         console.log('🟢 products loaded:', this.products);
-
+      this.totalProducts = res.total;
+      this.totalPages = Math.ceil(this.totalProducts / this.limit);
         this.afterLoadProducts();
       },
       error: (err) => {
@@ -115,41 +125,52 @@ export class ProductListComponent implements OnInit {
 
       return categoryMatch && brandMatch && priceMatch && ratingMatch;
     });
+
+    this.totalPages = Math.ceil(this.filteredProducts.length / this.itemsPerPage);
   }
 
   onCategoryChange(category: string, event: any) {
     event.target.checked
       ? this.selectedCategories.push(category)
       : this.selectedCategories = this.selectedCategories.filter(c => c !== category);
-    this.applyFilters();
+      this.currentPage = 1;
+this.applyFilters();
   }
 
   onBrandChange(brand: string, event: any) {
     event.target.checked
       ? this.selectedBrands.push(brand)
       : this.selectedBrands = this.selectedBrands.filter(b => b !== brand);
-    this.applyFilters();
-  }
-
-  onColorChange(color: string, event: any) {
-    event.target.checked
-      ? this.selectedColors.push(color)
-      : this.selectedColors = this.selectedColors.filter(c => c !== color);
+      this.currentPage = 1;
     this.applyFilters();
   }
 
   onPriceChange() {
+    this.currentPage = 1;
     this.applyFilters();
   }
 
   onRatingChange(rating: number) {
     this.minRating = rating;
+    this.currentPage = 1;
     this.applyFilters();
   }
 
   getDiscountedPrice(product: Product): number {
     return product.price - (product.price * product.discountPercentage / 100);
   }
+changePage(page: number): void {
+  if (page >= 1 && page <= this.totalPages) {
+    this.currentPage = page;
+    this.skip = (page - 1) * this.limit;
+    this.loadProducts(this.skip, this.itemsPerPage);
+  }
+}
 
+  get paginatedProducts(): Product[] {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    return this.filteredProducts.slice(start, end);
+  }
 
 }

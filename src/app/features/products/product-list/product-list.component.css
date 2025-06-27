@@ -40,8 +40,8 @@
 
 .form-range {
   height: 4px;
-  color: #45b7aa;
-  background-color: #45b7aa;
+  color: #62D0B6;
+  background-color: #62D0B6;
 }
 
 .color-dot {
@@ -70,6 +70,25 @@
 }
 
 .view-options button.active {
-  background: #45b7aa;
+  background: #62D0B6;
   color: white;
+}
+/* الزر العادي */
+.page-link.custom-green-btn {
+  color: #62D0B6;
+  border: 1px solid #62D0B6;
+  transition: 0.3s;
+}
+
+/* الزر عند الـ hover */
+.page-link.custom-green-btn:hover {
+  background-color: #62D0B6;
+  color: white;
+}
+
+/* الزر الفعّال (اللي عليه active) */
+.page-link.custom-green-btn.active {
+  background-color: #62D0B6;
+  color: white;
+  border-color: #62D0B6;
 }

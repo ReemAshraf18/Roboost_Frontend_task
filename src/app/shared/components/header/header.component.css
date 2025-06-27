@@ -41,7 +41,7 @@ body {
 .country-flag {
     width: 20px;
     height: 20px;
-    background-color: #10b981;
+    background-color: #62D0B6;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -109,7 +109,7 @@ body {
 
 .search-input:focus {
     outline: none;
-    border-color: #10b981;
+    border-color: #62D0B6;
     box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
 }
 
@@ -149,7 +149,7 @@ body {
 }
 
 .action-item:hover {
-    color: #10b981;
+    color: #62D0B6;
 }
 
 .action-text {
@@ -253,7 +253,7 @@ body {
 
 .dropdown-item:hover {
     background-color: #f9fafb;
-    color: #10b981;
+    color: #62D0B6;
 }
 
 /* Responsive */

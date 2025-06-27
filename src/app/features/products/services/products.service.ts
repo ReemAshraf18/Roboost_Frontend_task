@@ -27,20 +27,15 @@ export class ProductsService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(): Observable<Product[]> {
-    if (this.productsCache().length > 0) {
-      return new Observable<Product[]>(observer => {
-        observer.next(this.productsCache());
-        observer.complete();
-      });
-    }
-    return this.http.get<{ products: Product[] }>('https://dummyjson.com/products')
-      .pipe(
-        map(response => response.products),
-        tap((products: Product[]) => this.productsCache.set(products)),
-        shareReplay(1)
-      );
-  }
+  getProducts(skip: number = 0, limit: number = 30): Observable<{ products: Product[], total: number, skip: number, limit: number }> {
+  return this.http.get<{ products: Product[], total: number, skip: number, limit: number }>(
+    `https://dummyjson.com/products?skip=${skip}&limit=${limit}`
+  ).pipe(
+    tap((response) => this.productsCache.set(response.products)),
+    shareReplay(1)
+  );
+}
+
     getProductById(id: number): Observable<Product> {
     const cachedProduct = this.productsCache().find(p => p.id === id);
     if (cachedProduct) {

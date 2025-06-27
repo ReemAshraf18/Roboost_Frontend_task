@@ -53,7 +53,7 @@ body {
 }
 .product-category {
   font-size: 12px;
-  color: #45b7aa;
+  color: #62D0B6;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 5px;
@@ -148,7 +148,7 @@ body {
 }
 
 .btn-add-to-cart:hover {
-  border: #45b7aa 1px solid;
+  border: #62D0B6 1px solid;
   transform: translateY(-1px);
 }
 
