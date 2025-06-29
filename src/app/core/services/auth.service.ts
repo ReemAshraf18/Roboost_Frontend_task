@@ -8,7 +8,10 @@ import { Route, Router } from '@angular/router';
 export class AuthService {
   private readonly AUTH_KEY = 'auth_token';
   private readonly USER_KEY = 'user_data';
+  private readonly EXPIRATION_KEY = 'token_expiration';
+
   isAuthenticated = signal<boolean>(false);
+  expiration = signal<boolean>(false);
   currentUser = signal<any>(null);
   private API_URL = 'https://dummyjson.com/users';
 
@@ -16,6 +19,7 @@ export class AuthService {
     private router: Router) {
     this.checkAuthState();
   }
+
   login(credentials: { username: string; password: string }): Observable<any> {
     return this.http.get<any>(this.API_URL).pipe(
       map(response => {
@@ -28,7 +32,15 @@ export class AuthService {
 
         if (matchedUser) {
           const fakeToken = 'fake-token-' + matchedUser.id;
+
           this.isAuthenticated.set(true);
+          this.currentUser.set(matchedUser);
+          const now = new Date().getTime();
+          const expiration = now + 24 * 60 * 60 * 1000;
+          localStorage.setItem(this.AUTH_KEY, fakeToken);
+          localStorage.setItem(this.USER_KEY, JSON.stringify(matchedUser));
+          localStorage.setItem(this.EXPIRATION_KEY, expiration.toString());
+          this.setAutoLogout();
           return { token: fakeToken, user: matchedUser };
         } else {
           throw new Error('Invalid username or password');
@@ -44,23 +56,33 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem(this.AUTH_KEY);
     localStorage.removeItem(this.USER_KEY);
+    localStorage.removeItem(this.EXPIRATION_KEY);
+
     this.isAuthenticated.set(false);
     this.currentUser.set(null);
     this.router.navigate(['/login']);
   }
 
   private checkAuthState(): void {
-const token = localStorage.getItem(this.AUTH_KEY) || sessionStorage.getItem(this.AUTH_KEY);
+    const token = localStorage.getItem(this.AUTH_KEY) || sessionStorage.getItem(this.AUTH_KEY);
     const userData = localStorage.getItem(this.USER_KEY);
-    if (token && userData) {
+    const expiration = localStorage.getItem(this.EXPIRATION_KEY);
+    const now = new Date().getTime();
+
+    if (token && userData && expiration && now < +expiration) {
       this.isAuthenticated.set(true);
       this.currentUser.set(JSON.parse(userData));
+      this.setAutoLogout();
+    }
+    else {
+      this.logout();
     }
   }
 
   getAuthToken(): string | null {
-    return localStorage.getItem('auth_token');
+    return localStorage.getItem(this.AUTH_KEY);
   }
+  
   register(userData: {
     name: string;
     email: string;
@@ -69,6 +91,27 @@ const token = localStorage.getItem(this.AUTH_KEY) || sessionStorage.getItem(this
     return this.http.post('https://dummyjson.com/users/add', userData);
   }
 
+  isTokenExpired(): boolean {
+    const expiration = localStorage.getItem(this.EXPIRATION_KEY);
+    if (!expiration) return true;
 
+    const now = new Date().getTime();
+    return now > +expiration;
+  }
 
+  setAutoLogout(): void {
+    const expiration = +localStorage.getItem('token_expiration')!;
+    const now = new Date().getTime();
+    const timeout = expiration - now;
+
+    if (timeout > 0) {
+      setTimeout(() => {
+        this.logout();
+      }, timeout);
+    }
+  }
+
+  isLoggedIn(): boolean {
+    return this.isAuthenticated();
+  }
 }

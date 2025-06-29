@@ -30,7 +30,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     TranslateModule,
     SharedModule,
-    FilterPipe
+    FilterPipe,
 ],
   providers: [ProductsService],
 })

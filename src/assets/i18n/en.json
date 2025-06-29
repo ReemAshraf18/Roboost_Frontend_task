@@ -55,6 +55,15 @@
     "ADD_TO_CART": "Add to Cart",
     "SAR": "SAR"
   },
+  "HOME":
+  {
+    "DISCOVER_MORE": "Descover More..",
+    "FEATURED_PRODUCTS": "Featured Products",
+    "SUBTITLE" : "Shop the latest featured products added recently.",
+    "ALL": "Show All",
+    "CATEGORY": "Browse by category"
+
+  },
   "FILTERS": {
     "CATEGORY": "Category",
     "BRAND": "Brand",
@@ -64,7 +73,7 @@
     "RATING_AND_ABOVE": "{{rating}} & up"
   },
   "CART": {
-    "TITLE": "Your Cart",
+    "TITLE": "Home/ Cart",
     "SUBTOTAL": "Subtotal",
     "CHECKOUT": "Proceed to Checkout",
     "CONTINUE_SHOPPING": "Continue Shopping",
@@ -72,7 +81,10 @@
     "ORDER_SUMMARY": "Order Summary",
     "SHIPPING": "Shipping",
     "FREE_SHIPPING": "Free Shipping",
-    "TOTAL": "Total"
+    "TOTAL": "Total",
+    "TAX_NOTE": "Prices include VAT",
+    "APPLY_COUPON": "Apply",
+    "COUPON_PLACEHOLDER": "Enter discount code"
   },
   "FOOTER": {
     "ABOUT": {

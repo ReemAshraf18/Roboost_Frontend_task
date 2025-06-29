@@ -44,7 +44,8 @@
           <div class="search-container position-relative">
             <input type="text" class="form-control search-input ps-3" [(ngModel)]="searchTerm"
               (keyup.enter)="onSearch()" placeholder="{{ 'HEADER.SEARCH_PLACEHOLDER' | translate }}">
-            <button class="btn position-absolute top-50 translate-middle-y fas fa-search search-icon p-2" (click)="onSearch()">
+            <button class="btn position-absolute top-50 translate-middle-y fas fa-search search-icon p-2"
+              (click)="onSearch()">
             </button>
           </div>
         </div>
@@ -55,11 +56,16 @@
               <img src="assets/images/Sample_User_Icon.png" class="user-icon">
               <div>
                 <div style="color: rgb(169, 166, 166);">{{ 'HEADER.WELCOME' | translate }}</div>
-                <div class="small text-muted">{{ 'HEADER.LOGIN' | translate }}</div>
+                <a *ngIf="isUserLoggedIn" routerLink="/profile" style="color: rgb(47, 47, 47);" class="text-decoration-none">
+                   {{ username() }}
+                </a>
+                <a *ngIf="!isUserLoggedIn" routerLink="/auth/login" style="color: rgb(47, 47, 47);" class="text-decoration-none">
+                  {{ 'HEADER.LOGIN' | translate }}
+                </a>
 
               </div>
             </a>
-            <a href="#" class="d-flex align-items-center gap-2 text-decoration-none">
+            <a routerLink="/cart" class="d-flex align-items-center gap-2 text-decoration-none">
               <div class="position-relative p-2">
                 <i class="fas fa-shopping-cart fa-lg text-muted"></i>
                 <span class="cart-count badge bg-danger position-absolute top-0 start-100 translate-middle">

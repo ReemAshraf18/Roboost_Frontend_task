@@ -24,6 +24,8 @@ export class LoginComponent implements OnInit {
       rememberMe: [true]
     });
   }
+
+  
   loginForm: ReturnType<FormBuilder['group']>;
 
   isLoading = false;
@@ -60,8 +62,6 @@ export class LoginComponent implements OnInit {
 
         if (rememberMe) {
           localStorage.setItem('savedUsername', username!);
-          console.log('Saved to localStorage:', localStorage.getItem('savedUsername'));
-
         } else {
           sessionStorage.setItem('auth_token', res.token);
         }
@@ -69,6 +69,9 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('auth_token', res.token);
         localStorage.setItem('user_data', JSON.stringify(res.user));
         this.authService.isAuthenticated.set(true);
+        const now = new Date().getTime();
+        const expiration = now + 24 * 60 * 60 * 1000;
+        localStorage.setItem('token_expiration', expiration.toString());
         this.router.navigate(['/products']);
       },
       error: (err) => {

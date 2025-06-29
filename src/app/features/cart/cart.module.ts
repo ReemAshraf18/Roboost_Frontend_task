@@ -9,7 +9,7 @@ import { AuthGuard } from '../../core/guards/auth.guard';
 
 const routes : Routes = [
   {
-    path: 'cart', component: CartPageComponent, canActivate: [AuthGuard]
+    path: '', component: CartPageComponent, canActivate: [AuthGuard]
   }
 ];
 
@@ -22,6 +22,8 @@ const routes : Routes = [
     TranslateModule,
     PriceFormatPipe,
     RouterModule.forChild(routes)
-]
+],
+  exports: [RouterModule]
+
 })
 export class CartModule { }

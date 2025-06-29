@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
@@ -6,7 +6,25 @@ import { AuthService } from '../services/auth.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+
+   private _isAuthenticated = signal<boolean>(false);
+  isAuthenticated = this._isAuthenticated.asReadonly();
+
+
+  constructor(private authService: AuthService, private router: Router) 
+  {
+    const token = localStorage.getItem('auth_token');
+    this._isAuthenticated.set(!!token);
+  }
+  login(token: string) {
+    localStorage.setItem('access_token', token);
+    this._isAuthenticated.set(true);
+  }
+
+  logout() {
+    localStorage.removeItem('access_token');
+    this._isAuthenticated.set(false);
+  }
 
   canActivate(): boolean{
       console.log('AuthGuard - isAuthenticated?', this.authService.isAuthenticated());

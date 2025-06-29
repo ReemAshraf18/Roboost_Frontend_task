@@ -53,6 +53,16 @@
     "ADD_TO_CART": "أضف للسلة",
     "SAR": "ريال"
   },
+
+  "HOME":
+  {
+    "DISCOVER_MORE": "اكتشف المزيد",
+    "FEATURED_PRODUCTS" : "منتجات مميزة",
+    "SUBTITLE": "تسوق احدث المنتجات المميزة المضافة جديد",
+    "ALL": "عرض الكل",
+    "CATEGORY": "تصفح حسب الفئة"
+
+  },
   "FILTERS": {
     "CATEGORY": "الفئة",
     "BRAND": "الماركة",
@@ -62,7 +72,7 @@
     "RATING_AND_ABOVE": "{{rating}} فأكثر"
   },
   "CART": {
-    "TITLE": "سلة التسوق",
+    "TITLE": "الرئيسية/  مشتريات",
     "SUBTOTAL": "المجموع الفرعي",
     "CHECKOUT": "إتمام الشراء",
     "CONTINUE_SHOPPING": "مواصلة التسوق",
@@ -70,7 +80,10 @@
     "ORDER_SUMMARY": "ملخص الطلب",
     "SHIPPING": "الشحن",
     "FREE_SHIPPING": "شحن مجاني",
-    "TOTAL": "الإجمالي"
+    "TOTAL": "الإجمالي",
+    "TAX_NOTE": "الاسعار شاملة الضريبة",
+    "APPLY_COUPON": "اضافة",
+    "COUPON_PLACEHOLDER": "ادخل كود الخصم"
   },
   "FOOTER": {
     "ABOUT": {

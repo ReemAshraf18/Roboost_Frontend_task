@@ -1,1 +1,101 @@
-<h1>home works!</h1>
+<section class="hero-carousel position-relative">
+    <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+
+        <!-- Indicators -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+                aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+
+        <!-- Slides -->
+        <div class="carousel-inner">
+            <div class="carousel-item active mb-4">
+                <div class="container py-5 text-center text-white">
+                    <h2 class="fw-bold mb-3">أفضل التخفيضات 2022</h2>
+                    <p class="mb-4 w-75 mx-auto">متجر سلة يوفر لك كل ما تحتاجه من إلكترونيات أو أثاث منزلي بالإضافة إلى
+                        أفضل التخفيضات على المنتجات، تسوق الآن واستمتع بكل التخفيضات على المنتجات</p>
+                    <button class="btn btn-mint">{{ 'HOME.DISCOVER_MORE' | translate }}</button>
+                </div>
+            </div>
+
+
+            <div class="carousel-item mb-4">
+                <div class="container py-5 text-center text-white">
+                    <h2 class="fw-bold mb-3">أفضل التخفيضات 2022</h2>
+                    <p class="mb-4 w-75 mx-auto">متجر سلة يوفر لك كل ما تحتاجه من إلكترونيات أو أثاث منزلي بالإضافة إلى
+                        أفضل التخفيضات على المنتجات، تسوق الآن واستمتع بكل التخفيضات على المنتجات</p>
+                    <button class="btn btn-mint">{{ 'HOME.DISCOVER_MORE' | translate }}</button>
+                </div>
+            </div>
+
+
+            <div class="carousel-item mb-4">
+                <div class="container py-5 text-center text-white">
+                    <h2 class="fw-bold mb-3">أفضل التخفيضات 2022</h2>
+                    <p class="mb-4 w-75 mx-auto">متجر سلة يوفر لك كل ما تحتاجه من إلكترونيات أو أثاث منزلي بالإضافة إلى
+                        أفضل التخفيضات على المنتجات، تسوق الآن واستمتع بكل التخفيضات على المنتجات</p>
+                    <button class="btn btn-mint">{{ 'HOME.DISCOVER_MORE' | translate }}</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Arrows -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+            <span class="carousel-control-icon rounded-circle"><i class="fas fa-chevron-left"></i></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+            <span class="carousel-control-icon rounded-circle"><i class="fas fa-chevron-right"></i></span>
+        </button>
+    </div>
+</section>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-8">
+            <h5>{{'HOME.FEATURED_PRODUCTS' | translate}}</h5>
+            <p>{{ 'HOME.SUBTITLE' | translate }}</p>
+        </div>
+        <div class="col-4">
+            <a routerLink="/products" class="text-decoration-none">
+                <button class="btn btn-ecommerce">
+                    {{ 'HOME.ALL' | translate }} 
+                </button>
+            </a>
+        </div>
+    </div>
+    <!-- Products Grid -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 mb-4 col-sm-6 mb-4 h-100" *ngFor="let product of products">
+                <div (click)="goToProduct(product.id)" style="cursor: pointer;">
+                    <app-product-card [product]="product" (addToCart)="addToCart($event)">
+                    </app-product-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="container py-4">
+    <h5 class="mb-4">{{ 'HOME.CATEGORY' | translate }}</h5>
+
+    <div class="d-flex justify-content-center align-items-center gap-3">
+        <button class="btn btn-outline-secondary rounded-circle" (click)="prevPage()" [disabled]="currentPage === 0">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+            <div *ngFor="let category of displayedCategories" class="rounded-circle border p-3 category-bubble">
+                {{ category }}
+            </div>
+        </div>
+
+        <button class="btn btn-outline-secondary rounded-circle" (click)="nextPage()"
+            [disabled]="(currentPage + 1) * itemsPerPage >= categories.length">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+    </div>
+</section>
