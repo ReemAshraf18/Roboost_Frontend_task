@@ -1,5 +1,111 @@
 # EcommerceApp
 
+📦 Features
+User authentication (fake login with dummy token).
+
+Auto logout after token expiration (24h).
+
+Product listing with server-side pagination.
+
+Product details view.
+
+Shopping cart with quantity control.
+
+Category-based filtering.
+
+Language switcher (English / Arabic).
+
+Header search with navigation.
+
+Protected routes using AuthGuard.
+
+Signals for reactivity without page reload.
+
+Caching responses for better performance.
+
+Carousel and styled UI with Bootstrap.
+
+🧠 Assumptions Made
+We're simulating authentication by fetching users from DummyJSON and storing a fake token in localStorage.
+
+Since the API is fake, no actual payment or order processing is implemented.
+
+User profile editing and registration are not fully implemented due to API limitations.
+
+🚀 Additional Features Implemented
+Token expiration: The app auto-logs out after 24 hours.
+
+Auth Signal State: Header updates dynamically without needing refresh.
+
+Custom pipes: Used for price formatting and (optionally) category display.
+
+Pagination and Limit Controls: Fetching products in chunks (8 or 30 at a time).
+
+Cart Total Calculation using Signals.
+
+Animations & Carousel Styling using Bootstrap 5.
+🛠️ Approach Explanation
+The project is structured using feature modules for scalability and separation of concerns. Services (like ProductService or AuthService) communicate with the DummyJSON API using HttpClient.
+
+Signals:
+We used Angular Signals (signal, computed) instead of RxJS where possible to benefit from:
+
+Simpler reactivity
+
+Better change detection
+
+Cleaner templates
+
+Authentication:
+On login, we:
+
+Generate a fake token
+
+Store token and user in localStorage
+
+Save expiration time
+
+Setup auto logout via setTimeout
+
+The app reacts to login state immediately using signals (without refreshing).
+
+Cart:
+Cart state is reactive. Quantity changes update totals immediately using Signals and local caching.
+
+📩 Feedback or Suggestions
+Feel free to open an issue or contact the developer if you want to contribute or suggest improvements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.9.
 
 ## Development server
