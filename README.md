@@ -76,6 +76,9 @@ Cart state is reactive. Quantity changes update totals immediately using Signals
 Feel free to open an issue or contact the developer if you want to contribute or suggest improvements.
 
 
+🧑‍💻 Built By
+Reem – Full Stack Developer 👩‍💻
+
 
 
 
